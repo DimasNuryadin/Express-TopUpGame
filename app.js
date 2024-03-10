@@ -4,6 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// Method override
+const methodOverride = require('method-override')
+
+// Router
 const dashboardRouter = require('./app/dashboard/router');
 const categoryRouter = require('./app/category/router');
 
@@ -12,6 +16,9 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// Method override
+app.use(methodOverride('_method'))
 
 app.use(logger('dev'));
 app.use(express.json());

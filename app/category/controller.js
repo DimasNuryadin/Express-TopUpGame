@@ -32,5 +32,28 @@ module.exports = {
     } catch (err) {
       console.log(err)
     }
+  },
+  // Edit Category
+  viewEdit: async (req, res) => {
+    try {
+      const { id } = req.params;  // Ambil dari params
+      const category = await Category.findOne({ _id: id })   // Cek data berdasarkan id
+      res.render('admin/category/edit', { category })
+      // console.log(category)
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  actionEdit: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name } = req.body;
+      await Category.findOneAndUpdate({
+        _id: id
+      }, { name })
+      res.redirect("/category")
+    } catch (err) {
+      console.log(err)
+    }
   }
 }

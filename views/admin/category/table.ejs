@@ -7,14 +7,14 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Looping data category -->
+    <!-- Get Data Category -->
     <% for(let i = 0; i < category.length; i++){ %>
     <tr>
       <td><%= i+1 %></td>
       <td><%= category[i].name %></td>
       <td>
         <form action="">
-          <a href="" class="btn btn-warning">
+          <a href="/category/edit/<%= category[i]._id%>" class="btn btn-warning">
             <i class="fas fa-pencil-alt"></i>
             Ubah
           </a>
