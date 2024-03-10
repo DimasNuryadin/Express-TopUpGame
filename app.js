@@ -4,8 +4,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// Method override
+// Method override untuk method PUT dan DELETE
 const methodOverride = require('method-override')
+
+// 
+const session = require('express-session')
+
+// Connect Flash
+const flash = require('connect-flash');
 
 // Router
 const dashboardRouter = require('./app/dashboard/router');
@@ -19,6 +25,17 @@ app.set('view engine', 'ejs');
 
 // Method override
 app.use(methodOverride('_method'))
+
+// Express Session
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+}))
+
+// Connect Flash
+app.use(flash());
 
 app.use(logger('dev'));
 app.use(express.json());

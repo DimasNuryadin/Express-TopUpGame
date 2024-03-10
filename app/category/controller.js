@@ -5,19 +5,29 @@ module.exports = {
   // Get Category
   index: async (req, res) => {
     try {
+      // Connect Flash
+      const alertMessage = req.flash("alertMessage")  // Dapat dari app.js
+      const alertStatus = req.flash("alertStatus")
+      const alert = { message: alertMessage, status: alertStatus }
+
       const category = await Category.find()
       res.render("admin/category/view_category", {  // Mengambil file dari folder views
-        category      // Kirim data ke render views
+        category,      // Kirim data ke render views
+        alert
       })
     } catch (err) {
-      console.log(err)
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/category')
     }
   },
   viewCreate: async (req, res) => {
     try {
       res.render("admin/category/create")
     } catch (err) {
-      console.log(err)
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/category')
     }
   },
   // Create Category
@@ -27,10 +37,14 @@ module.exports = {
       let category = await Category({ name })
       await category.save()
 
+      req.flash('alertMessage', "Data Berhasil ditambah!")
+      req.flash('alertStatus', "success")
       res.redirect('/category')
 
     } catch (err) {
-      console.log(err)
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/category')
     }
   },
   // Edit Category
@@ -41,7 +55,9 @@ module.exports = {
       res.render('admin/category/edit', { category })
       // console.log(category)
     } catch (err) {
-      console.log(err)
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/category')
     }
   },
   actionEdit: async (req, res) => {
@@ -51,9 +67,15 @@ module.exports = {
       await Category.findOneAndUpdate({
         _id: id
       }, { name })
+
+      req.flash('alertMessage', "Data Berhasil diubah!")
+      req.flash('alertStatus', "success")
       res.redirect("/category")
+
     } catch (err) {
-      console.log(err)
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/category')
     }
   },
   // Delete Category
@@ -61,9 +83,15 @@ module.exports = {
     try {
       const { id } = req.params;
       await Category.findByIdAndDelete({ _id: id });
+
+      req.flash('alertMessage', "Data Berhasil dihapus!")
+      req.flash('alertStatus', "success")
       res.redirect("/category")
+
     } catch (err) {
-      console.log(err)
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/category')
     }
   }
 }
