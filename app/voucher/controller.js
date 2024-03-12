@@ -18,6 +18,10 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus }
 
       const voucher = await Voucher.find()
+        .populate('category')       // Populate Mengambil data dari collection category berdasarkan _id
+        .populate('nominals');
+      console.log("voucher >> ")
+      console.log(voucher)
       res.render("admin/voucher/view_voucher", {  // Mengambil file dari folder views
         voucher,      // Kirim data ke render views
         alert
@@ -46,7 +50,7 @@ module.exports = {
 
       if (req.file) {
         let tmp_path = req.file.path;
-        let originalExt = req.file.originalname.split('.')[req.file.originalname.split('.').length - 1]
+        let originalExt = req.file.originalname.split('.')[req.file.originalname.split('.').length - 1];
         let filename = req.file.filename + '.' + originalExt;
         let target_path = path.resolve(config.rootPath, `public/uploads/${filename}`)
 
@@ -56,7 +60,7 @@ module.exports = {
         src.pipe(dest)
         src.on('end', async () => {
           try {
-            let voucher = await Voucher({ name, category, nominals, thubnail: __filename })
+            let voucher = await Voucher({ name, category, nominals, thumbnail: filename })
             await voucher.save()
             req.flash('alertMessage', "Data Voucher Berhasil ditambah!")
             req.flash('alertStatus', "success")
