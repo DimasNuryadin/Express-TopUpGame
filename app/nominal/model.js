@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const nominalSchema = mongoose.Schema({
   coinName: {
     type: String,
-    require: [true, "Nama kategori harus diisi!"]
+    require: [true, "Nama koin harus diisi!"]
   },
   coinQuantity: {
     type: Number,
