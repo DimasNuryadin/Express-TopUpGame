@@ -46,51 +46,51 @@ module.exports = {
       res.redirect('/bank')
     }
   },
-  // // Edit Bank
-  // viewEdit: async (req, res) => {
-  //   try {
-  //     const { id } = req.params;  // Ambil dari params
-  //     const bank = await Bank.findOne({ _id: id })   // Cek data berdasarkan id
-  //     res.render('admin/bank/edit', { bank })
-  //     // console.log(bank)
-  //   } catch (err) {
-  //     req.flash('alertMessage', `${err.message}`)
-  //     req.flash('alertStatus', 'danger')
-  //     res.redirect('/bank')
-  //   }
-  // },
-  // actionEdit: async (req, res) => {
-  //   try {
-  //     const { id } = req.params;
-  //     const { coinName, coinQuantity, price } = req.body;
-  //     await Bank.findOneAndUpdate({
-  //       _id: id
-  //     }, { coinName, coinQuantity, price })
+  // Edit Bank
+  viewEdit: async (req, res) => {
+    try {
+      const { id } = req.params;  // Ambil dari params
+      const bank = await Bank.findOne({ _id: id })   // Cek data berdasarkan id
+      res.render('admin/bank/edit', { bank })
+      // console.log(bank)
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/bank')
+    }
+  },
+  actionEdit: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, nameBank, noRekening } = req.body;
+      await Bank.findOneAndUpdate({
+        _id: id
+      }, { name, nameBank, noRekening })
 
-  //     req.flash('alertMessage', "Data Bank Berhasil diubah!")
-  //     req.flash('alertStatus', "success")
-  //     res.redirect("/bank")
+      req.flash('alertMessage', "Data Bank Berhasil diubah!")
+      req.flash('alertStatus', "success")
+      res.redirect("/bank")
 
-  //   } catch (err) {
-  //     req.flash('alertMessage', `${err.message}`)
-  //     req.flash('alertStatus', 'danger')
-  //     res.redirect('/bank')
-  //   }
-  // },
-  // // Delete Bank
-  // actionDelete: async (req, res) => {
-  //   try {
-  //     const { id } = req.params;
-  //     await Bank.findByIdAndDelete({ _id: id });
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/bank')
+    }
+  },
+  // Delete Bank
+  actionDelete: async (req, res) => {
+    try {
+      const { id } = req.params;
+      await Bank.findByIdAndDelete({ _id: id });
 
-  //     req.flash('alertMessage', "Data Bank Berhasil dihapus!")
-  //     req.flash('alertStatus', "success")
-  //     res.redirect("/bank")
+      req.flash('alertMessage', "Data Bank Berhasil dihapus!")
+      req.flash('alertStatus', "success")
+      res.redirect("/bank")
 
-  //   } catch (err) {
-  //     req.flash('alertMessage', `${err.message}`)
-  //     req.flash('alertStatus', 'danger')
-  //     res.redirect('/bank')
-  //   }
-  // }
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/bank')
+    }
+  }
 }
