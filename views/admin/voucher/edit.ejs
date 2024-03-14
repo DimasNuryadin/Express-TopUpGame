@@ -42,8 +42,8 @@
                     placeholder="Masukan nama game" required>
                 </div>
                 <div class="form-group">
-                  <label>Kategori</label>
-                  <select class="form-control select2" style="width: 100%;" name="category" required>
+                  <label for="category">Kategori</label>
+                  <select class="form-control select2" id="category" style="width: 100%;" name="category" required>
                     <option selected="selected">Pilih Kategori</option>
                     <% category.forEach(category=> { %>
                     <option value="<%= category._id %>"
@@ -53,10 +53,10 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Nominal</label>
+                  <label for="nominals">Nominal</label>
                   <div class="select2-purple">
-                    <select class="form-control select2" multiple="multiple" data-placeholder="Pilih Nominal"
-                      style="width: 100%;" name="nominals" required>
+                    <select class="form-control select2" id="nominals" multiple="multiple"
+                      data-placeholder="Pilih Nominal" style="width: 100%;" name="nominals" required>
                       <% nominal.forEach(nominal=> { %>
                       <option value="<%= nominal._id %>" <% voucher.nominals.forEach(voucherNominal => { %>
                         <% if(nominal._id.toString() === voucherNominal._id.toString()){ %> selected <% } %> <% }) %>>
