@@ -12,7 +12,8 @@ module.exports = {
 
       if (req.session.user === null || req.session.user === undefined) {
         res.render("admin/users/view_signin", {  // Mengambil file dari folder views
-          alert
+          alert,
+          title: "Halaman Sign In"
         })
       } else {
         res.redirect('/dashboard')
@@ -60,5 +61,9 @@ module.exports = {
       req.flash('alertStatus', 'danger')
       res.redirect('/')
     }
-  }
+  },
+  actionLogOut: async (req, res) => {
+    req.session.destroy();
+    res.redirect('/')
+  },
 }

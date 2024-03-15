@@ -13,7 +13,9 @@ module.exports = {
       const payment = await Payment.find().populate("banks")
       res.render("admin/payment/view_payment", {  // Mengambil file dari folder views
         payment,      // Kirim data ke render views
-        alert
+        alert,
+        name: req.session.user.name,
+        title: "Halaman Pembayaran",
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -24,7 +26,11 @@ module.exports = {
   viewCreate: async (req, res) => {
     try {
       const banks = await Bank.find()
-      res.render("admin/payment/create", { banks })
+      res.render("admin/payment/create", {
+        banks,
+        name: req.session.user.name,
+        title: "Halaman Tambah Pembayaran",
+      })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
@@ -55,7 +61,12 @@ module.exports = {
       const payment = await Payment.findOne({ _id: id })   // Cek data berdasarkan id
         .populate("banks")
       const banks = await Bank.find()
-      res.render('admin/payment/edit', { payment, banks })
+      res.render('admin/payment/edit', {
+        payment,
+        banks,
+        name: req.session.user.name,
+        title: "Halaman Edit Pembayaran",
+      })
       // console.log(payment)
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)

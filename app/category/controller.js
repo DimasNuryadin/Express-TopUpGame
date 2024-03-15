@@ -13,7 +13,9 @@ module.exports = {
       const category = await Category.find()
       res.render("admin/category/view_category", {  // Mengambil file dari folder views
         category,      // Kirim data ke render views
-        alert
+        alert,
+        name: req.session.user.name,
+        title: "Halaman Kategori"
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -23,7 +25,10 @@ module.exports = {
   },
   viewCreate: async (req, res) => {
     try {
-      res.render("admin/category/create")
+      res.render("admin/category/create", {
+        name: req.session.user.name,
+        title: "Halaman Tambah Kategori"
+      })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
@@ -52,7 +57,11 @@ module.exports = {
     try {
       const { id } = req.params;  // Ambil dari params
       const category = await Category.findOne({ _id: id })   // Cek data berdasarkan id
-      res.render('admin/category/edit', { category })
+      res.render('admin/category/edit', {
+        category,
+        name: req.session.user.name,
+        title: "Halaman Edit Kategori"
+      })
       // console.log(category)
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)

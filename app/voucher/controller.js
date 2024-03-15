@@ -24,7 +24,9 @@ module.exports = {
       // console.log(voucher)
       res.render("admin/voucher/view_voucher", {  // Mengambil file dari folder views
         voucher,      // Kirim data ke render views
-        alert
+        alert,
+        name: req.session.user.name,
+        title: "Halaman Voucher",
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -36,7 +38,12 @@ module.exports = {
     try {
       const category = await Category.find();
       const nominal = await Nominal.find();
-      res.render("admin/voucher/create", { category, nominal })
+      res.render("admin/voucher/create", {
+        category,
+        nominal,
+        name: req.session.user.name,
+        title: "Halaman Tambah Voucher",
+      })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
@@ -101,7 +108,13 @@ module.exports = {
       const voucher = await Voucher.findOne({ _id: id })   // Cek data berdasarkan id
         .populate('category')       // Populate Mengambil data dari collection category berdasarkan _id
         .populate('nominals');
-      res.render('admin/voucher/edit', { voucher, category, nominal })
+      res.render('admin/voucher/edit', {
+        voucher,
+        category,
+        nominal,
+        name: req.session.user.name,
+        title: "Halaman Edit Voucher",
+      })
       // console.log(voucher)
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
