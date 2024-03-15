@@ -24,6 +24,6 @@ const voucherSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,   // Untuk relasikan dengan collection User
     ref: 'User'                         // Ref diisi dengan nama collection yang mau di ambil
   },
-})
+}, { timestamps: true })  // Untuk menambah createdAt dan updateAt
 
 module.exports = mongoose.model('Voucher', voucherSchema) // Voucher : nama collection

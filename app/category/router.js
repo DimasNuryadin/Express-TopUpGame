@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { index, viewCreate, actionCreate, viewEdit, actionEdit, actionDelete } = require('./controller')  // Tempat Bisnis Logic
 
+// Middleware login
+const { isLoginAdmin } = require('../middleware/auth')
+router.use(isLoginAdmin)
+
 /* Category */
 router.get('/', index);
 router.get('/create', viewCreate);

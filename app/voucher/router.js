@@ -5,7 +5,11 @@ const { index, viewCreate, actionCreate, viewEdit, actionEdit, actionDelete, act
 const multer = require('multer')
 const os = require('os')
 
-/* Nominal */
+// Middleware login
+const { isLoginAdmin } = require('../middleware/auth')
+router.use(isLoginAdmin)
+
+/* Voucher */
 router.get('/', index);
 router.get('/create', viewCreate);
 router.post('/create', multer({ dest: os.tmpdir() }).single('thumbnail'), actionCreate);

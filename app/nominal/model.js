@@ -12,6 +12,6 @@ const nominalSchema = mongoose.Schema({
     type: Number,
     default: 0
   }
-})
+}, { timestamps: true })  // Untuk menambah createdAt dan updateAt
 
 module.exports = mongoose.model('Nominal', nominalSchema) // Nominal : nama collection

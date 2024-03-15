@@ -12,6 +12,6 @@ const bankSchema = mongoose.Schema({
     type: String,
     require: [true, "Nomor rekening bank harus diisi!"]
   },
-})
+}, { timestamps: true })  // Untuk menambah createdAt dan updateAt
 
 module.exports = mongoose.model('Bank', bankSchema) // Bank : nama collection

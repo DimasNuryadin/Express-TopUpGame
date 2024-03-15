@@ -13,6 +13,6 @@ const paymentSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Bank'
   }]
-})
+}, { timestamps: true })  // Untuk menambah createdAt dan updateAt
 
 module.exports = mongoose.model('Payment', paymentSchema) // Nominal : nama collection
