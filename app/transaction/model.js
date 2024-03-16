@@ -54,9 +54,9 @@ const transactionSchema = mongoose.Schema({
     name: { type: String, require: [true, 'Nama player harus diisi'] },
     phoneNumber: {
       type: String,
-      require: [true, "Nama akun harus diisi"],
-      maxLength: [13, "Panjang nama harus antara 9 - 13 karakter"],
-      minLength: [9, "Panjang nama harus antara 9 - 13 karakter"],
+      require: [true, "No telepon harus diisi"],
+      maxLength: [13, "Panjang No telepon harus antara 9 - 13 karakter"],
+      minLength: [9, "Panjang No telepon harus antara 9 - 13 karakter"],
     }
   },
 
