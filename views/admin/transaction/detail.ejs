@@ -1,0 +1,162 @@
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Transaksi</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/transaction">Transaksi</a></li>
+            <li class="breadcrumb-item active">Detail</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Detail Transaksi</h3>
+            </div>
+
+            <!-- Detail Transaksi -->
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Nama Player
+                </div>
+                <div class="col-sm-4">
+                  : <%= transaction.player.name %>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  No Telepon
+                </div>
+                <div class="col-sm-4">
+                  : <%= transaction.player.phoneNumber %>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Nama Game
+                </div>
+                <div class="col-sm-2">
+                  :
+                  <img src="http://localhost:3000/uploads/<%= transaction.historyVoucherTopup.thumbnail %>"
+                    alt="thumbnail" width="100px">
+                </div>
+                <%= transaction.historyVoucherTopup.gameName %> -
+                <%= transaction.historyVoucherTopup.category %>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Item
+                </div>
+                <div class="col-sm-4">
+                  : <%= transaction.historyVoucherTopup.coinQuantity %>
+                  <%= transaction.historyVoucherTopup.coinName %>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Harga
+                </div>
+                <div class="col-sm-4">
+                  : Rp <%= transaction.historyVoucherTopup.price %>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Pajak
+                </div>
+                <div class="col-sm-4">
+                  : Rp <%= transaction.tax %>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Total Harga
+                </div>
+                <div class="col-sm-4">
+                  : Rp <%= transaction.value%>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Pembayaran
+                </div>
+                <div class="col-sm-4">
+                  : <%= transaction.historyPayment.type %>
+                  <%= transaction.historyPayment.bankName %> -
+                  <%= transaction.historyPayment.name %> -
+                  <%= transaction.historyPayment.noRekening %>
+                </div>
+              </div>
+            </div>
+            <div class="invoice p-3">
+              <div class="row">
+                <div class="col-sm-3">
+                  Status
+                </div>
+                <div class="col-sm-4">
+                  : <% if(transaction.status === 'pending') { %>
+                  <span class=" badge badge-warning">
+                    <%= transaction.status %>
+                  </span>
+                  <% } else if(transaction.status === 'success') { %>
+                  <span class="badge badge-success">
+                    <%= transaction.status %>
+                  </span>
+                  <% } else { %>
+                  <span class="badge badge-danger">
+                    <%= transaction.status %>
+                  </span>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+
+<%- include ../../partials/footer.ejs %>
+<%- include ../../partials/js.ejs %>
