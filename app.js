@@ -13,7 +13,7 @@ const session = require('express-session')
 // Connect Flash
 const flash = require('connect-flash');
 
-// Router
+// Router Admin
 const dashboardRouter = require('./app/dashboard/router');
 const categoryRouter = require('./app/category/router');
 const nominalRouter = require('./app/nominal/router');
@@ -24,8 +24,12 @@ const usersRouter = require('./app/users/router');
 const transactionRouter = require('./app/transaction/router');
 const playerRouter = require('./app/player/router');
 
+// Untuk API
+const authRouter = require('./app/auth/router');
+
 const app = express();
 
+// URL
 const URL = '/API/v1'
 
 // view engine setup
@@ -66,6 +70,7 @@ app.use('/transaction', transactionRouter);
 
 // API
 app.use(`${URL}/players`, playerRouter);
+app.use(`${URL}/auth`, authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
