@@ -1,4 +1,6 @@
 const Player = require('../player/model')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 // Multer
 const path = require('path')
@@ -54,7 +56,6 @@ module.exports = {
       } else {
         let player = await Player(payload).save()
         delete player._doc.password;      // Menghapus data password pada json untuk ditampilkan di response
-
         res.status(201).json({ data: player })
       }
 
@@ -69,5 +70,37 @@ module.exports = {
       // Jika error lain tampilkan ini
       next(err)
     }
+  },
+  signIn: async (req, res, next) => {
+    const { email, password } = req.body;
+
+    Player.findOne({ email: email }).then(async (player) => {
+      if (player) {
+        const checkPassword = await bcrypt.compare(password, player.password)  // result true/false
+        if (checkPassword) {
+          // JWT, create token
+          const token = jwt.sign({
+            player: {
+              id: player.id,
+              username: player.username,
+              email: player.email,
+              name: player.name,
+              phoneNumber: player.phoneNumber,
+              avatar: player.avatar,
+            }
+          }, config.jwtKey)
+
+          // Kirim token ke response
+          res.status(200).json({ data: { token } })
+        } else {
+          res.status(403).json({ message: 'password yang anda masukan salah' })
+        }
+      } else {
+        res.status(403).json({ message: 'email yang anda masukan belum terdaftar' })
+      }
+    }).catch((err) => {
+      res.status(500).json({ message: err.message || `Internal server error` })
+      next();
+    })
   }
 }
