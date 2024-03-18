@@ -18,6 +18,7 @@ module.exports = {
       res.status(500).json({ message: err.message || `Internal server error` })
     }
   },
+
   detailPage: async (req, res) => {
     const { id } = req.params;
     try {
@@ -36,6 +37,7 @@ module.exports = {
       res.status(500).json({ message: err.message || `Internal server error` })
     }
   },
+
   category: async (req, res) => {
     try {
       const category = await Category.find();
@@ -44,6 +46,7 @@ module.exports = {
       res.status(500).json({ message: err.message || `Internal server error` })
     }
   },
+
   checkout: async (req, res) => {
     try {
       const { accountUser, name, nominal, voucher, payment, bank } = req.body;
@@ -108,6 +111,48 @@ module.exports = {
 
       res.status(201).json({
         data: payload,
+      })
+
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internal server error` })
+    }
+  },
+
+  history: async (req, res) => {
+    try {
+      const { status = "" } = req.query;
+
+      let criteria = {}
+
+      if (status.length) {
+        criteria = {
+          ...criteria,
+          status: { $regex: `${status}`, $options: 'i' }
+        }
+      }
+
+      if (req.player._id) {
+        criteria = {
+          ...criteria,
+          player: req.player._id,   // Dapat dari jwt
+        }
+      }
+      // console.log(criteria)
+
+      const history = await Transaction.find(criteria);
+      let total = await Transaction.aggregate([
+        { $match: criteria },
+        {
+          $group: {
+            _id: null,
+            value: { $sum: "$value" }
+          }
+        }
+      ])
+
+      res.status(200).json({
+        data: history,
+        total: total.length ? total[0].value : 0
       })
 
     } catch (err) {

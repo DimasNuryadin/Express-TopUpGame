@@ -56,7 +56,8 @@ playerSchema.path('email').validate(async function (value) {
     const count = await this.model('Player').countDocuments({ email: value })
     return !count;
   } catch (err) {
-    throw err
+    // throw err
+    throw new Error(err)
   }
 }, attr => `${attr.value} sudah terdaftar`)
 
