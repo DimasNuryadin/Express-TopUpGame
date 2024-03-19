@@ -4,6 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// Cors untuk api bisa diakses oleh frontend
+const cors = require('cors')
+
 // Method override untuk method PUT dan DELETE pada file ejs
 const methodOverride = require('method-override')
 
@@ -31,6 +34,9 @@ const app = express();
 
 // URL
 const URL = '/API/v1'
+
+// Cors
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
