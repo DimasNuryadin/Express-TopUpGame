@@ -172,4 +172,31 @@ module.exports = {
       res.status(500).json({ message: err.message || `Internal server error` })
     }
   },
+
+  dashboard: async (req, res) => {
+    try {
+      const count = await Transaction.aggregate([
+        { $match: { player: req.player._id } },       // Mengambil transaction berdasarkan id player
+        { $group: { _id: '$category', value: { $sum: '$value' } } }  // Group data berdasarkan kategori yang sama, lalu value dijumlahkan
+      ])
+
+      // Mencocokan id category dengan transaction, lalu name dimasukan ke dalam response
+      const category = await Category.find();
+      category.forEach(element => {
+        count.forEach(data => {
+          if (data._id.toString() === element._id.toString()) {
+            data.name = element.name;   // Memasukan data name ke dalam count
+            // console.log(data.name)
+          }
+        })
+      })
+
+      const voucher = await Transaction.find({ player: req.player._id })
+        .populate('category')
+        .sort({ 'updatedAt': -1 })
+      res.status(200).json({ data: voucher, count })
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internal server error` })
+    }
+  }
 }
