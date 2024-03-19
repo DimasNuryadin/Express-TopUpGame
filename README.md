@@ -1,7 +1,7 @@
 # Express-TopUpGame
 
 This project is the backend of the Top Up Game in the BuildWithAngga course class, for the frontend, see the following link:
-[GitHub Pages](https://github.com/DimasNuryadin/Next-TopUpGame)
+[Next-TopUpGame](https://github.com/DimasNuryadin/Next-TopUpGame)
 
 ### How to use
 
