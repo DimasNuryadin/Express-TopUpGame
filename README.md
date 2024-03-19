@@ -10,6 +10,14 @@ First install modules
 yarn install
 ```
 
+.env file configuration
+```bash
+MODE=dev
+SERVICE_NAME=express-topupgame
+MONGO_URL=mongodb://127.0.0.1:27017/db_name
+JWT=xxx
+```
+
 Running Servers
 ```bash
 yarn dev
