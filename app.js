@@ -10,8 +10,9 @@ const cors = require('cors')
 // Method override untuk method PUT dan DELETE pada file ejs
 const methodOverride = require('method-override')
 
-// Untuk
-const session = require('express-session')
+// Untuk Session
+// const session = require('express-session')
+const session = require('cookie-session')
 
 // Connect Flash
 const flash = require('connect-flash');
