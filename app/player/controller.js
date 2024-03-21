@@ -37,7 +37,15 @@ module.exports = {
         return res.status(404).json({ message: "Voucher game tidak ditemukan.!" })
       }
 
-      res.status(200).json({ data: voucher })
+      const payment = await Payment.find();
+      if (!payment) return res.status(404).json({ message: "Payment game tidak ditemukan" })
+
+      const payload = {
+        detail: voucher,
+        payment
+      }
+
+      res.status(200).json({ data: payload })
 
     } catch (err) {
       res.status(500).json({ message: err.message || `Internal server error` })
