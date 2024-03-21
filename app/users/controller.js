@@ -63,7 +63,11 @@ module.exports = {
     }
   },
   actionLogOut: async (req, res) => {
-    req.session.destroy();
+    // Untuk express-session
+    // req.session.destroy();
+
+    // Untuk cookie-session
+    req.session = null
     res.redirect('/')
   },
 }
