@@ -12,6 +12,8 @@ module.exports = {
     } else {
       next()
     }
+    console.log("Session >> ")
+    console.log(req.session);
   },
   isLoginPlayer: async (req, res, next) => {
     try {
