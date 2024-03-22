@@ -37,7 +37,7 @@ module.exports = {
         return res.status(404).json({ message: "Voucher game tidak ditemukan.!" })
       }
 
-      const payment = await Payment.find();
+      const payment = await Payment.find().populate('banks')
       if (!payment) return res.status(404).json({ message: "Payment game tidak ditemukan" })
 
       const payload = {
