@@ -5,7 +5,7 @@
   }],
   "routes": [{
     "src": "/(.*)",
-    "dest": "/index.jssss",
+    "dest": "/index.js",
     "headers": [{
         "key": "Access-Control-Allow-Credentials",
         "value": "true"
