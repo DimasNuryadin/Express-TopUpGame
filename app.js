@@ -28,8 +28,6 @@ const usersRouter = require('./app/users/router');
 const transactionRouter = require('./app/transaction/router');
 const playerRouter = require('./app/player/router');
 
-const corsVercel = require('./app/middleware/vercel')
-
 // Untuk API
 const authRouter = require('./app/auth/router');
 
@@ -40,7 +38,6 @@ const URL = '/API/v1'
 
 // Cors
 app.use(cors())
-app.use(corsVercel())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
