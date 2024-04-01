@@ -6,10 +6,8 @@ const { signUp, signIn } = require('./controller')  // Tempat Bisnis Logic
 const multer = require('multer')
 const os = require('os')
 
-const vercelCors = require('../middleware/auth')
-
 /* GET home page. */
 router.post('/signup', multer({ dest: os.tmpdir() }).single('image'), signUp);
-router.post('/signin', vercelCors(signIn))
+router.post('/signin', signIn)
 
 module.exports = router;
