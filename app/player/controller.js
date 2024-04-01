@@ -86,7 +86,7 @@ module.exports = {
 
       // Tax
       let tax = (10 / 100) * res_nominal._doc.price;
-      let value = res_nominal._doc.price - tax;
+      let value = res_nominal._doc.price + tax;
 
       // Simpan semua data dalam payload
       const payload = {

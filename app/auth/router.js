@@ -8,6 +8,6 @@ const os = require('os')
 
 /* GET home page. */
 router.post('/signup', multer({ dest: os.tmpdir() }).single('image'), signUp);
-router.post('/signin', multer({ dest: os.tmpdir() }).single('image'), signIn)
+router.post('/signin', signIn)
 
 module.exports = router;
