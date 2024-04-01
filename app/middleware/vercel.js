@@ -15,4 +15,4 @@ const allowCors = fn => async (req, res) => {
   return await fn(req, res)
 }
 
-module.exports = allowCors()
+module.exports = allowCors(handler)
