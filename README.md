@@ -7,7 +7,7 @@ This project is the backend of the Top Up Game in the BuildWithAngga course clas
 
 First install modules
 ```bash
-yarn install
+npm install
 ```
 
 .env file configuration
